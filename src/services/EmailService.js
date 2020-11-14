@@ -10,9 +10,9 @@ let transport = nodemailer.createTransport({
 });
 
 let message = {
-    from: '',
-    to: '',
-    subject: '',
+    from: 'classinforme@sinfor.com',
+    to: 'teste@email.com',
+    subject: 'Classinforme - Primeiro contato',
     text: ''
 };
 
@@ -25,18 +25,14 @@ const messageTest = {
 
 module.exports = {
     emailContato(request, response) {
-        const { from, to, subject, text } = request.body;
-        message.from = from;
-        message.to = to;
-        message.subject = subject;
-        message.text = text;
+        const { razao_social, email, tipo_produto } = request.body;
+        message.text = `A empresa: ${razao_social}, através do email: ${email}, deseja anunciar um produto da categoria: ${tipo_produto}`;
 
         return transport.sendMail(message, function (err, info) {
             if (err) {
                 console.log(err);
             } else {
                 console.log(info);
-                response.sendStatus(200);
             }
         })
     }
