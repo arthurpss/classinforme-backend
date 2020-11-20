@@ -24,14 +24,16 @@ const messageTest = {
 };
 
 module.exports = {
-    emailContato(request, response) {
-        const { razao_social, email, tipo_produto } = request.body;
-        message.text = `A empresa: ${razao_social}, através do email: ${email}, deseja anunciar um produto da categoria: ${tipo_produto}`;
+    async emailContato(request, response) {
+        const { razao_social, email, tipo_produto, campo_livre } = request.body;
+        message.text = `A empresa: ${razao_social}, através do email: ${email}, deseja anunciar um produto da categoria: ${tipo_produto}\n${campo_livre}`;
 
         return transport.sendMail(message, function (err, info) {
             if (err) {
+                response.sendStatus(404);
                 console.log(err);
             } else {
+                response.sendStatus(200);
                 console.log(info);
             }
         })
