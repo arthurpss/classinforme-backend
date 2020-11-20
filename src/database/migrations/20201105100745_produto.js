@@ -6,8 +6,8 @@ exports.up = function(knex) {
       table.text('descricao').notNullable();
       table.string('caminho_img');
       table.string('caminho_video');
-      table.integer('empresa_id').unsigned();
-      table.foreign('empresa_id').references('Empresa.empresa_id');
+      table.string('empresa_cnpj').unsigned();
+      table.foreign('empresa_cnpj').references('Empresa.cnpj');
     });
   };
   

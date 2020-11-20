@@ -6,8 +6,8 @@ exports.up = function(knex) {
       table.string('telefone').notNullable();
       table.text('email').notNullable();
       table.string('rede_social').notNullable();
-      table.integer('empresa_id').unsigned();
-      table.foreign('empresa_id').references('Empresa.empresa_id');
+      table.integer('empresa_cnpj').unsigned();
+      table.foreign('empresa_cnpj').references('Empresa.cnpj');
     });
   };
   

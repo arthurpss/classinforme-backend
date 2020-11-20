@@ -20,7 +20,7 @@ module.exports = function (passport) {
         function (cnpj, senha, done) {
             console.log(cnpj, senha);
             try {
-                EmpresaController.listaEmpresaPorCNPJ(cnpj).then(user => {
+                EmpresaController.listaEmpresa(cnpj).then(user => {
                     if (!user) {
                         return done(null, false, { message: "Empresa não existe" });
                     }
