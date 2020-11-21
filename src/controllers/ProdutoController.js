@@ -5,7 +5,6 @@ module.exports = {
         const cnpj = request.params.cnpj;
         try {
             const produtos = await connection('produto').where('empresa_cnpj', cnpj).select('*');
-            console.log(produtos)
             return response.json(produtos);    
         } catch (error) {
             console.log(error)

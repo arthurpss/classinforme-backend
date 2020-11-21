@@ -3,8 +3,7 @@ exports.up = function(knex) {
         table.increments('anuncio_id');
         table.integer('produto_id').unsigned();
         table.foreign('produto_id').references('Produto.produto_id');
-        table.string('local_banner').notNullable();
-        table.integer('qtd_tempo').notNullable();
+        table.string('plano').notNullable();
         table.string('email').notNullable();
         table.boolean('ativo').notNullable();
       });
