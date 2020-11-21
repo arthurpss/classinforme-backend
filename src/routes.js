@@ -25,5 +25,6 @@ routes.post('/novo-produto/:cnpj', ProdutoController.novoProduto);
 
 routes.post('/novo-anuncio/:cnpj/:plano', AnuncioController.novoAnuncio);
 routes.get('/anuncios-empresa/:cnpj', AnuncioController.listaAnunciosPorEmpresa);
+routes.get('/anuncios', AnuncioController.listaAnuncios);
 
 module.exports = routes;

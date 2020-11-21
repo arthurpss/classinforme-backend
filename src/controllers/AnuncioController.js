@@ -1,3 +1,4 @@
+const { response } = require('express');
 const connection = require('../database/connection');
 
 module.exports = {
@@ -12,6 +13,15 @@ module.exports = {
         } catch (error) {
             console.log(error)
             return response.json(500)
+        }
+    },
+
+    async listaAnuncios(request, response) {
+        try {
+            const anuncios = await connection('anuncio').select('*').from('anuncio');
+            return response.json(anuncios);
+        } catch (error) {
+            console.log(error)
         }
     },
 
