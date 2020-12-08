@@ -23,4 +23,4 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(routes);
 
-app.listen(process.env.port || 3333);
+app.listen(process.env.PORT || 3333);
