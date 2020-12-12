@@ -21,10 +21,13 @@ routes.post('/login-empresa', passport.authenticate('local', {
 routes.get('/lista-empresa/:cnpj', EmpresaController.listaEmpresaPorCNPJ);
 
 routes.get('/produtos-empresa/:cnpj', ProdutoController.listaProdutosPorEmpresa);
+routes.get('/produto-id', ProdutoController.listaProdutoPorId);
 routes.post('/novo-produto/:cnpj', ProdutoController.novoProduto);
 
 routes.post('/novo-anuncio/:cnpj/:plano', AnuncioController.novoAnuncio);
 routes.get('/anuncios-empresa/:cnpj', AnuncioController.listaAnunciosPorEmpresa);
 routes.get('/anuncios', AnuncioController.listaAnuncios);
+routes.get('/anuncios-ativos', AnuncioController.listaAnunciosAtivos);
+routes.patch('/altera-anuncio/:id', AnuncioController.ativaDesativaAnuncio);
 
 module.exports = routes;

@@ -10,7 +10,17 @@ module.exports = {
             console.log(error)
             return response.json(500)
         }
-        
+    },
+
+    async listaProdutoPorId(request, response) {
+        const id = request.params.id;
+        try {
+            const produto = await connection('produto').select('*').where('produto_id', id).first();
+            return response.json(produto);    
+        } catch (error) {
+            console.log(error)
+            return response.json(500)
+        }
     },
 
     async novoProduto(request, response) {
@@ -28,7 +38,6 @@ module.exports = {
         }
         else {
             return response.sendStatus(500);
-        }
-        
+        }   
     }
 }

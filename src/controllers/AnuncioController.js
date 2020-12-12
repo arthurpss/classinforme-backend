@@ -1,4 +1,3 @@
-const { response } = require('express');
 const connection = require('../database/connection');
 
 module.exports = {
@@ -19,9 +18,33 @@ module.exports = {
     async listaAnuncios(request, response) {
         try {
             const anuncios = await connection('anuncio').select('*').from('anuncio');
+            console.log(anuncios);
             return response.json(anuncios);
         } catch (error) {
             console.log(error)
+        }
+    },
+
+    async listaAnunciosAtivos(request, response) {
+        try {
+            const anuncios = await connection('anuncio').select('*').from('anuncio').where('ativo', 1);
+            // console.log(anuncios);
+            return response.json(anuncios);
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    async ativaDesativaAnuncio(request, response) {
+        console.log(request.params, request.body);
+        const anuncio_id = request.params.id;
+        const ativar = request.body.ativar;
+        try {
+            await connection('anuncio').where('anuncio_id', anuncio_id).update('ativo', ativar);
+            return response.sendStatus(200);
+        } catch (error) {
+            console.log(error);
+            return response.sendStatus(400);
         }
     },
 
