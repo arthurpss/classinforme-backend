@@ -21,7 +21,7 @@ routes.post('/login-empresa', passport.authenticate('local', {
 routes.get('/lista-empresa/:cnpj', EmpresaController.listaEmpresaPorCNPJ);
 
 routes.get('/produtos-empresa/:cnpj', ProdutoController.listaProdutosPorEmpresa);
-routes.get('/produto-id', ProdutoController.listaProdutoPorId);
+routes.get('/produto-id/:id', ProdutoController.listaProdutoPorId);
 routes.post('/novo-produto/:cnpj', ProdutoController.novoProduto);
 
 routes.post('/novo-anuncio/:cnpj/:plano', AnuncioController.novoAnuncio);

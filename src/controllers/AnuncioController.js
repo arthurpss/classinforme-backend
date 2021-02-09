@@ -7,7 +7,6 @@ module.exports = {
             const anuncios = await connection('anuncio')
                 .join('produto', 'anuncio.produto_id', 'produto.produto_id')
                 .select('*').where('produto.empresa_cnpj', cnpj);
-            console.log(anuncios);
             return response.json(anuncios);
         } catch (error) {
             console.log(error)
@@ -18,7 +17,6 @@ module.exports = {
     async listaAnuncios(request, response) {
         try {
             const anuncios = await connection('anuncio').select('*').from('anuncio');
-            console.log(anuncios);
             return response.json(anuncios);
         } catch (error) {
             console.log(error)
@@ -28,7 +26,6 @@ module.exports = {
     async listaAnunciosAtivos(request, response) {
         try {
             const anuncios = await connection('anuncio').select('*').from('anuncio').where('ativo', 1);
-            // console.log(anuncios);
             return response.json(anuncios);
         } catch (error) {
             console.log(error)
@@ -36,7 +33,6 @@ module.exports = {
     },
 
     async ativaDesativaAnuncio(request, response) {
-        console.log(request.params, request.body);
         const anuncio_id = request.params.id;
         const ativar = request.body.ativar;
         try {
