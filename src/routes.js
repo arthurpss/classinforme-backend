@@ -13,11 +13,19 @@ routes.get('/catalogo', CatalogoService.leCatalogo);
 routes.post('/primeiro-contato/email', EmailService.emailContato);
 
 routes.post('/nova-empresa', EmpresaController.novaEmpresa);
-routes.get('/lista-empresas', EmpresaController.listaEmpresas);
+routes.get('/lista-empresas', EmpresaController.listaEmpresa);
 routes.post('/login-empresa', passport.authenticate('local', {
-    successRedirect: "/dashboard-empresa",
-    failureRedirect: "/cadastro-empresa"
-}));
+    // successRedirect: "/dashboard-empresa",
+    // failureRedirect: "/cadastro-empresa",
+    // failureFlash: true
+}))
+routes.get('/login-empresa', (req, res, next) => {
+    if (req.query.fail)
+        res.render('login', { message: 'Usuário e/ou senha incorretos!' });
+    else
+        res.render('login', { message: null });
+});
+
 routes.get('/lista-empresa/:cnpj', EmpresaController.listaEmpresaPorCNPJ);
 
 routes.get('/produtos-empresa/:cnpj', ProdutoController.listaProdutosPorEmpresa);

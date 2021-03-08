@@ -5,7 +5,7 @@ const EmpresaController = require('./controllers/EmpresaController');
 module.exports = function (passport) {
     passport.serializeUser((user, done) => done(null, user.cnpj));
 
-    passport.deserializeUser(async (cnpj, done) => await EmpresaController.listaEmpresaPorCNPJ(cnpj, (err, user) => {
+    passport.deserializeUser(async (cnpj, done) => await EmpresaController.listaEmpresa(cnpj, (err, user) => {
         if (err) {
             return done(null, err);
         } else {
@@ -24,7 +24,6 @@ module.exports = function (passport) {
                     if (!user) {
                         return done(null, false, { message: "Empresa não existe" });
                     }
-
                     try {
                         if (bcrypt.compareSync(senha, user.senhaHash)) {
                             console.log("Login realizado");

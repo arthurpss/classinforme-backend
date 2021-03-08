@@ -6,7 +6,7 @@ require('./auth')(passport);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const expressSession = require('express-session')({
+const session = require('express-session')({
     secret: process.env.secret,
     resave: false,
     saveUninitialized: false
@@ -16,9 +16,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+// app.use(express.cookieParser());
 app.use(bodyParser.json());
-// app.use(expressSession);
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(routes);

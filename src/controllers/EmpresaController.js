@@ -33,7 +33,6 @@ module.exports = {
   async listaEmpresaPorCNPJ(request, response) {
     const cnpj = request.params.cnpj;
     const empresa = await connection('empresa').select('*').from('empresa').where('cnpj', cnpj).first();
-    console.log(empresa);
     return response.json(empresa);
   },
 
