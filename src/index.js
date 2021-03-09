@@ -16,9 +16,6 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-// app.use(express.cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session);
 app.use(passport.initialize());
 app.use(passport.session());

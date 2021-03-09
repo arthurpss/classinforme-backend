@@ -15,7 +15,8 @@ module.exports = function (passport) {
 
     passport.use(new LocalStrategy({
         usernameField: 'cnpj',
-        passwordField: 'senha'
+        passwordField: 'senha',
+        session: true
     },
         function (cnpj, senha, done) {
             console.log(cnpj, senha);
@@ -43,5 +44,4 @@ module.exports = function (passport) {
             }
         }
     ));
-
 }
