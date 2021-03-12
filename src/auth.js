@@ -5,13 +5,13 @@ const EmpresaController = require('./controllers/EmpresaController');
 module.exports = function (passport) {
     passport.serializeUser((user, done) => done(null, user.cnpj));
 
-    passport.deserializeUser(async (cnpj, done) => await EmpresaController.listaEmpresa(cnpj, (err, user) => {
-        if (err) {
-            return done(null, err);
-        } else {
-            return done(null, user);
+    passport.deserializeUser((cnpj, done) => {
+        try {
+            EmpresaController.listaEmpresa(cnpj).then(user => done(null, user))
+        } catch {
+            return done(null, false)
         }
-    }));
+    });
 
     passport.use(new LocalStrategy({
         usernameField: 'cnpj',
@@ -23,24 +23,26 @@ module.exports = function (passport) {
             try {
                 EmpresaController.listaEmpresa(cnpj).then(user => {
                     if (!user) {
+                        console.log("Empresa não existe")
                         return done(null, false, { message: "Empresa não existe" });
-                    }
-                    try {
-                        if (bcrypt.compareSync(senha, user.senhaHash)) {
-                            console.log("Login realizado");
-                            return done(null, user);
-                        } else {
-                            console.log("Senha errada");
-                            return done(null, false, { message: "Senha incorreta" });
+                    } else {
+                        try {
+                            if (bcrypt.compareSync(senha, user.senhaHash)) {
+                                console.log("Login realizado");
+                                return done(null, user);
+                            } else {
+                                console.log("Senha errada");
+                                return done(null, false, { message: "Senha incorreta" });
+                            }
+                        } catch (e) {
+                            console.log("Erro na verificação de senha:", e);
+                            return done(null, false, { message: "Falha ao verificar senha" });
                         }
-                    } catch (e) {
-                        console.log(e);
-                        return done(e);
                     }
                 });
             } catch (error) {
                 console.log(error);
-                return done(error);
+                return done(null, false, { message: "Empresa não encontrada" });
             }
         }
     ));

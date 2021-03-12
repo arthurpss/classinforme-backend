@@ -3,8 +3,8 @@ const routes = require('./routes');
 const passport = require('passport');
 require('dotenv').config();
 require('./auth')(passport);
-const bodyParser = require('body-parser');
 const cors = require('cors');
+const flash = require('express-flash');
 
 const session = require('express-session')({
     secret: process.env.secret,
@@ -16,6 +16,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(flash());
 app.use(session);
 app.use(passport.initialize());
 app.use(passport.session());

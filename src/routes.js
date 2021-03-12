@@ -15,13 +15,13 @@ routes.post('/primeiro-contato/email', EmailService.emailContato);
 routes.post('/nova-empresa', EmpresaController.novaEmpresa);
 routes.get('/lista-empresas', EmpresaController.listaEmpresas);
 routes.post('/login-empresa', passport.authenticate('local', {
-    failureMessage: "Falha no login."
-}),
-(req, res) => {
-    res.status(200).send()
-}
+    failureFlash: "Falha no login.",
+    successFlash: "Login realizado."
+})
+    , (req, res) => {
+        req.user ? res.sendStatus(200) : res.sendStatus(401)
+    }
 )
-
 routes.get('/lista-empresa/:cnpj', EmpresaController.listaEmpresaPorCNPJ);
 
 routes.get('/produtos-empresa/:cnpj', ProdutoController.listaProdutosPorEmpresa);
