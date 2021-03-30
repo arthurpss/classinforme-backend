@@ -2,10 +2,8 @@ const connection = require('../database/connection');
 
 module.exports = {
     async novaImagem(request, response) {
-        // console.log("Request.file: ", request.file);
         const produto_id = request.params.produto_id;
-        const url = "";
-        const { originalname: name, size, filename: key } = request.file;
+        const { originalname: name, size, filename: key, path: url } = request.file;
 
         try {
             imagem = await connection('imagem').insert({
