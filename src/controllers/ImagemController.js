@@ -1,4 +1,5 @@
 const connection = require('../database/connection');
+const path = require('path');
 
 module.exports = {
     async novaImagem(request, response) {
@@ -9,7 +10,7 @@ module.exports = {
             imagem = await connection('imagem').insert({
                 key, size, name, produto_id, url
             });
-            return response.json(imagem);
+            return response.sendStatus(200);
         } catch (error) {
             console.log(error)
             return response.sendStatus(400);
@@ -34,5 +35,14 @@ module.exports = {
 
     },
 
-
+    getImagem(request, response) {
+        const imageKey = request.params.key;
+        const imagePath = path.join(__dirname, "../files/uploads", imageKey);
+        try {
+            response.sendFile(imagePath);
+        } catch (error) {
+            console.log(error);
+            response.status(400).send('Error: Image does not exists');
+        }
+    }
 }

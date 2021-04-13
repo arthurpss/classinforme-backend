@@ -40,6 +40,7 @@ routes.post('/novo-produto/:cnpj', ProdutoController.novoProduto);
 routes.post('/nova-imagem/:produto_id', multer(multerConfig).single("file"), ImagemController.novaImagem);
 routes.get('/lista-imagens', ImagemController.getImages);
 routes.get('/lista-imagens/:produto_id', ImagemController.getImagesByProdutoId);
+routes.get('/imagem/:key', ImagemController.getImagem);
 
 //Anúncios
 routes.post('/novo-anuncio/:cnpj/:plano', AnuncioController.novoAnuncio);

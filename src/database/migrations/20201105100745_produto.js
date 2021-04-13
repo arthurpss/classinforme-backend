@@ -4,7 +4,7 @@ exports.up = function(knex) {
       table.string('categoria').notNullable();
       table.string('titulo').notNullable();
       table.text('descricao').notNullable();
-      // table.string('caminho_img');
+      table.string('thumbnail_url');
       // table.string('caminho_video');
       table.string('empresa_cnpj').unsigned();
       table.foreign('empresa_cnpj').references('Empresa.cnpj');

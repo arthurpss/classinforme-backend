@@ -25,12 +25,13 @@ module.exports = {
 
     async novoProduto(request, response) {
         const empresa_param = request.params.cnpj;
+        const thumbnail_url = "";
         const { produto_id, categoria, titulo, descricao, empresa_cnpj } = request.body;
         console.log(request.body);
         if (empresa_param === empresa_cnpj) {
             try {
                 await connection('produto').insert({
-                    produto_id, categoria, titulo, descricao, empresa_cnpj
+                    produto_id, categoria, titulo, descricao, empresa_cnpj, thumbnail_url
                 });
                 return response.sendStatus(200);
             } catch (error) {
