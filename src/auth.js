@@ -7,7 +7,9 @@ module.exports = function (passport) {
 
     passport.deserializeUser((cnpj, done) => {
         try {
-            EmpresaController.listaEmpresa(cnpj).then(user => done(null, user))
+            EmpresaController.listaEmpresa(cnpj).then(user => {
+                done(null, user)
+            })
         } catch {
             return done(null, false)
         }
@@ -28,7 +30,7 @@ module.exports = function (passport) {
                     } else {
                         try {
                             if (bcrypt.compareSync(senha, user.senhaHash)) {
-                                console.log("Login realizado");
+                                console.log("Login realizado");                                
                                 return done(null, user);
                             } else {
                                 console.log("Senha errada");

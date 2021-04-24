@@ -27,7 +27,6 @@ module.exports = {
         const empresa_param = request.params.cnpj;
         const thumbnail_url = "";
         const { produto_id, categoria, titulo, descricao, empresa_cnpj } = request.body;
-        console.log(request.body);
         if (empresa_param === empresa_cnpj) {
             try {
                 await connection('produto').insert({
