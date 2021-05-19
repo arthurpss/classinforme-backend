@@ -22,14 +22,14 @@ routes.post('/empresa', EmpresaController.novaEmpresa);
 routes.get('/empresas', EmpresaController.listaEmpresas);
 routes.get('/empresa/:cnpj', EmpresaController.listaEmpresaPorCNPJ);
 
-//Login
+//Login-empresa
 routes.post('/login-empresa', passport.authenticate('local'), jwtService.login);
 routes.post('/token-empresa', jwtService.getAccessToken);
 routes.post('/logout-empresa', jwtService.verifyJWT, jwtService.logout);
 
 //Produtos
 routes.get('/produtos/:cnpj', jwtService.verifyJWT, ProdutoController.listaProdutosPorEmpresa);
-routes.get('/produto/:id', jwtService.verifyJWT, ProdutoController.listaProdutoPorId);
+routes.get('/produto/:id', ProdutoController.listaProdutoPorId);
 routes.post('/produto/:cnpj', jwtService.verifyJWT, ProdutoController.novoProduto);
 
 //Imagens
@@ -41,8 +41,8 @@ routes.get('/imagem/:key', ImagemController.getImagem);
 //Anúncios
 routes.post('/anuncio/:cnpj/:plano', jwtService.verifyJWT, AnuncioController.novoAnuncio);
 routes.get('/anuncios/:cnpj', AnuncioController.listaAnunciosPorEmpresa);
-routes.get('/anuncios', jwtService.verifyJWT, AnuncioController.listaAnuncios);
+routes.get('/anuncios', AnuncioController.listaAnuncios);
 routes.get('/anuncios-ativos', AnuncioController.listaAnunciosAtivos);
-routes.patch('/anuncio/:id', jwtService.verifyJWT, AnuncioController.ativaDesativaAnuncio);
+routes.patch('/anuncio/:id', AnuncioController.ativaDesativaAnuncio);
 
 module.exports = routes;

@@ -36,8 +36,9 @@ module.exports = {
         const anuncio_id = request.params.id;
         const ativar = request.body.ativar;
         try {
-            await connection('anuncio').where('anuncio_id', anuncio_id).update('ativo', ativar);
-            return response.sendStatus(200);
+            const anuncio = await connection('anuncio').where('anuncio_id', anuncio_id).update('ativo', ativar);
+            // return response.sendStatus(200);
+            return response.json(anuncio);
         } catch (error) {
             console.log(error);
             return response.sendStatus(400);
