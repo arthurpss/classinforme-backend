@@ -16,7 +16,7 @@ module.exports = {
             const token = generateToken(cnpj);
             const refreshToken = jwt.sign({ cnpj }, process.env.jwt_secret);
             refreshTokens.push(refreshToken);
-
+            
             res.json({ auth: true, token: token, refreshToken: refreshToken, cnpj })
         } else { res.sendStatus(401) }
     },

@@ -21,11 +21,12 @@ routes.post('/primeiro-contato/email', EmailService.emailContato);
 routes.post('/empresa', EmpresaController.novaEmpresa);
 routes.get('/empresas', EmpresaController.listaEmpresas);
 routes.get('/empresa/:cnpj', EmpresaController.listaEmpresaPorCNPJ);
+routes.patch('/empresa/:cnpj', EmpresaController.atualizaEmpresa);
 
 //Login-empresa
-routes.post('/login-empresa', passport.authenticate('local'), jwtService.login);
-routes.post('/token-empresa', jwtService.getAccessToken);
-routes.post('/logout-empresa', jwtService.verifyJWT, jwtService.logout);
+routes.post('/login', passport.authenticate('local'), jwtService.login);
+routes.post('/token', jwtService.getAccessToken);
+routes.post('/logout', jwtService.verifyJWT, jwtService.logout);
 
 //Produtos
 routes.get('/produtos/:cnpj', jwtService.verifyJWT, ProdutoController.listaProdutosPorEmpresa);

@@ -39,5 +39,26 @@ module.exports = {
   async listaEmpresa(cnpj) {
     const empresa = await connection('empresa').select('*').from('empresa').where('cnpj', cnpj).first();
     return empresa;
+  },
+
+  async atualizaEmpresa(request, response) {
+    const cnpjAtual = request.params.cnpj;
+    const { cod_sinfor, novoCnpj, razao_social, endereco, cidade, bairro, cep, filiado } = request.body;
+    try {
+      await connection('empresa').where('cnpj', cnpjAtual).update({
+        cod_sinfor: cod_sinfor,
+        cnpj: novoCnpj,
+        razao_social: razao_social,
+        endereco: endereco,
+        cidade: cidade,
+        bairro: bairro,
+        cep: cep,
+        filiado: filiado
+      });
+      return response.sendStatus(200);
+    } catch (error) {
+      console.log(error)
+      return response.sendStatus(400);
+    }
   }
 };
