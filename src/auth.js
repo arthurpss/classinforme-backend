@@ -26,7 +26,6 @@ module.exports = function (passport) {
         session: true
     },
         function (cnpj, senha, done) {
-            console.log(cnpj, senha);
             // Para fazer login de admin
             if (cnpj === process.env.admin_usuario && senha === process.env.admin_senha) {
                 return done(null, {cnpj: cnpj, senha: senha});

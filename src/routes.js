@@ -14,8 +14,9 @@ const jwtService = require('./services/JwtService');
 //Catalogo
 routes.get('/catalogo', CatalogoService.leCatalogo);
 
-//Email
+//Emails
 routes.post('/primeiro-contato/email', EmailService.emailContato);
+routes.post('/anuncio/email', EmailService.emailAnuncio);
 
 //Empresas
 routes.post('/empresa', EmpresaController.novaEmpresa);

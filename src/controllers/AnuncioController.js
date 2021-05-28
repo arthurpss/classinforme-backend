@@ -48,10 +48,11 @@ module.exports = {
     async novoAnuncio(request, response) {
         const plano = request.params.plano;
         const { produto_id, email } = request.body;
-        const ativo = false
+        const ativo = false;
+        const status = 0;
         try {
             await connection('anuncio').insert({
-                produto_id, plano, email, ativo
+                produto_id, plano, email, ativo, status
             });
             return response.sendStatus(200);
         } catch (error) {
