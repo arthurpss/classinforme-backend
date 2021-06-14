@@ -33,6 +33,7 @@ routes.post('/logout', jwtService.verifyJWT, jwtService.logout);
 routes.get('/produtos/:cnpj', jwtService.verifyJWT, ProdutoController.listaProdutosPorEmpresa);
 routes.get('/produto/:id', ProdutoController.listaProdutoPorId);
 routes.post('/produto/:cnpj', jwtService.verifyJWT, ProdutoController.novoProduto);
+routes.patch('/produto/:id', jwtService.verifyJWT, ProdutoController.atualizaProduto);
 
 //Imagens
 routes.post('/imagem/:produto_id', multer(multerConfig).single("file"), ImagemController.novaImagem);

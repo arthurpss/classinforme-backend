@@ -5,7 +5,7 @@ module.exports = {
         const cnpj = request.params.cnpj;
         try {
             const produtos = await connection('produto').where('empresa_cnpj', cnpj).select('*');
-            return response.json(produtos);    
+            return response.json(produtos);
         } catch (error) {
             console.log(error)
             return response.json(500)
@@ -16,7 +16,7 @@ module.exports = {
         const id = request.params.id;
         try {
             const produto = await connection('produto').select('*').where('produto_id', id).first();
-            return response.json(produto);    
+            return response.json(produto);
         } catch (error) {
             console.log(error)
             return response.json(500)
@@ -39,6 +39,23 @@ module.exports = {
         }
         else {
             return response.sendStatus(500);
-        }   
+        }
+    },
+
+    async atualizaProduto(request, response) {
+        const idAtual = request.params.id;
+        const { categoria, titulo, descricao, empresa_cnpj } = request.body;
+        try {
+            await connection('produto').where('produto_id', idAtual).update({
+                categoria: categoria,
+                titulo: titulo,
+                descricao: descricao,
+                empresa_cnpj: empresa_cnpj
+            });
+            return response.sendStatus(200);
+        } catch (error) {
+            console.log(error)
+            return response.sendStatus(400);
+        }
     }
 }
