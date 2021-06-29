@@ -5,12 +5,13 @@ exports.up = function(knex) {
       table.string('cnpj').notNullable().unique();
       table.string('razao_social').notNullable();
       table.string('cep').notNullable();
-      table.string('cidade').notNullable();
-      table.string('bairro').notNullable();
       table.text('endereco').notNullable();
-      table.boolean('filiado').notNullable();
-      table.datetime('data_contato');
-      table.datetime('data_liberacao');
+      table.string('responsavel').notNullable();
+      table.string('email').notNullable();
+      table.string('telefone');
+      table.string('responsavel_secundario');
+      table.string('email_secundario');
+      table.string('telefone_secundario');
       table.string('senhaHash').notNullable();
     });
   };
