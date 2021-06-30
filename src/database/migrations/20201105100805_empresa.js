@@ -12,6 +12,7 @@ exports.up = function(knex) {
       table.string('responsavel_secundario');
       table.string('email_secundario');
       table.string('telefone_secundario');
+      table.datetime('data_contato');
       table.string('senhaHash').notNullable();
     });
   };
