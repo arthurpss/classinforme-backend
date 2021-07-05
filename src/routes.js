@@ -23,6 +23,7 @@ routes.post('/empresa', EmpresaController.novaEmpresa);
 routes.get('/empresas', EmpresaController.listaEmpresas);
 routes.get('/empresa/:cnpj', EmpresaController.listaEmpresaPorCNPJ);
 routes.patch('/empresa/:cnpj', EmpresaController.atualizaEmpresa);
+routes.patch('/empresaAdmin/:cnpj', EmpresaController.atualizaEmpresaAdmin);
 
 //Login-empresa
 routes.post('/login', passport.authenticate('local'), jwtService.login);
