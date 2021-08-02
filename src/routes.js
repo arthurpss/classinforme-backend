@@ -10,6 +10,7 @@ const AnuncioController = require('./controllers/AnuncioController');
 const multerConfig = require('./multer');
 const ImagemController = require('./controllers/ImagemController');
 const jwtService = require('./services/JwtService');
+const PlanoController = require('./controllers/PlanoController');
 
 //Catalogo
 routes.get('/catalogo', CatalogoService.leCatalogo);
@@ -17,6 +18,8 @@ routes.get('/catalogo', CatalogoService.leCatalogo);
 //Emails
 routes.post('/primeiro-contato/email', EmailService.emailContato);
 routes.post('/anuncio/email', EmailService.emailAnuncio);
+routes.post('/cadastro-admin/email', EmailService.emailCadastroToAdmin);
+routes.post('/cadastro-empresa/email', EmailService.emailCadastroToEmpresa);
 
 //Empresas
 routes.post('/empresa', EmpresaController.novaEmpresa);
@@ -48,5 +51,14 @@ routes.get('/anuncios/:cnpj', AnuncioController.listaAnunciosPorEmpresa);
 routes.get('/anuncios', AnuncioController.listaAnuncios);
 routes.get('/anuncios-ativos', AnuncioController.listaAnunciosAtivos);
 routes.patch('/anuncio/:id', AnuncioController.ativaDesativaAnuncio);
+
+//Planos
+routes.post('/plano', jwtService.verifyJWT, PlanoController.novoPlano);
+routes.get('/planos', PlanoController.listaPlanos);
+routes.get('/planos-ativos', PlanoController.listaPlanosAtivos);
+routes.get('/plano/:id', PlanoController.listaPlanoPorId);
+routes.patch('/plano/:id', PlanoController.atualizaPlano);
+// routes.patch('/plano/:id', AnuncioController.ativaDesativaAnuncio);
+
 
 module.exports = routes;

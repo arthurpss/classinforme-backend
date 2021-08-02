@@ -38,10 +38,45 @@ module.exports = {
 
     async emailAnuncio(request, response) {
         const { cnpj, email, plano } = request.body;
-        message.to = 'arthur.passos.correa@hotmail.com';
+        message.to = 'lucia@sinfor.org.br';
         message.from = 'sinfor.classinforme@gmail.com';
         message.subject = `Novo anúncio: ${cnpj}`;
         message.text = `A empresa dona do CNPJ ${cnpj}, com o email ${email}, cadastrou um novo anúncio na plataforma. O plano do anúncio é o ${plano}.`;
+
+        return transport.sendMail(message, (err, info) => {
+            if (err) {
+                response.sendStatus(404);
+                console.log(err);
+            } else {
+                response.sendStatus(200);
+            }
+        })
+    },
+
+    async emailCadastroToAdmin(request, response) {
+        const { razao_social } = request.body;
+        message.to = 'lucia@sinfor.org.br';
+        message.from = 'sinfor.classinforme@gmail.com';
+        message.subject = `Nova empresa! ${razao_social}`;
+        message.text = `A empresa "${razao_social}" acaba de se cadastrar na plataforma.`;
+
+        return transport.sendMail(message, (err, info) => {
+            if (err) {
+                response.sendStatus(404);
+                console.log(err);
+            } else {
+                response.sendStatus(200);
+            }
+        })
+    },
+
+    async emailCadastroToEmpresa(request, response) {
+        const { razao_social, email } = request.body;
+        message.to = email;
+        message.from = 'sinfor.classinforme@gmail.com';
+        message.subject = `Bem vindo(a), ${razao_social}!`;
+        message.text = `    Faça seu login utilizando o CNPJ e a senha informados no cadastro através do link: https://classinforme.netlify.app/login 
+        \n  O Sinfor te deseja boas-vindas e se dispõe a responder suas dúvidas através do email lucia@sinfor.org.br.`;
 
         return transport.sendMail(message, (err, info) => {
             if (err) {
