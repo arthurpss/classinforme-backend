@@ -33,10 +33,10 @@ module.exports = {
     },
 
     async novoPlano(request, response) {
-        const { preco, titulo, descricao, ativo } = request.body;
+        const { preco, titulo, descricao, ativo, tipo } = request.body;
         try {
             await connection('plano').insert({
-                preco, titulo, descricao, ativo
+                preco, titulo, descricao, ativo, tipo
             });
             return response.sendStatus(200);
         } catch (error) {
@@ -47,13 +47,14 @@ module.exports = {
 
     async atualizaPlano(request, response) {
         const id = request.params.id;
-        const { preco, titulo, descricao, ativo } = request.body;
+        const { preco, titulo, descricao, ativo, tipo } = request.body;
         try {
             await connection('plano').where('plano_id', id).update({
                 preco: preco,
                 titulo: titulo,
                 descricao: descricao,
-                ativo: ativo
+                ativo: ativo,
+                tipo: tipo
             });
             return response.sendStatus(200);
         } catch (error) {
