@@ -32,6 +32,16 @@ module.exports = {
         }
     },
 
+    async listaAnunciosPorTipo(request, response) {
+        const tipo = request.body.tipo;
+        try {
+            const anuncios = await connection('anuncio').select('*').from('anuncio').where('plano', tipo).orWhere('plano', 4);
+            return response.json(anuncios);
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
     async ativaDesativaAnuncio(request, response) {
         const anuncio_id = request.params.id;
         const ativar = request.body.ativar;

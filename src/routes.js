@@ -50,6 +50,7 @@ routes.post('/anuncio/:cnpj/:plano', jwtService.verifyJWT, AnuncioController.nov
 routes.get('/anuncios/:cnpj', AnuncioController.listaAnunciosPorEmpresa);
 routes.get('/anuncios', AnuncioController.listaAnuncios);
 routes.get('/anuncios-ativos', AnuncioController.listaAnunciosAtivos);
+routes.get('/anuncios-tipo', AnuncioController.listaAnunciosPorTipo);
 routes.patch('/anuncio/:id', AnuncioController.ativaDesativaAnuncio);
 
 //Planos
