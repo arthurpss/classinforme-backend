@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
   async novaEmpresa(request, response) {
-    console.log(request.body);
     const { cod_sinfor, cnpj, razao_social, endereco, cep, responsavel, email, telefone, responsavel_secundario, email_secundario, telefone_secundario, senha } = request.body;
     const data_contato = Date.now();
     let senhaHash = "";

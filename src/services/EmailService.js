@@ -22,7 +22,7 @@ module.exports = {
     async emailContato(request, response) {
         const { razao_social, email, tipo_produto, campo_livre } = request.body;
         message.to = email;
-        message.from = 'sinfor.classinforme@gmail.com';
+        message.from = 'classinforme@sinfor.org.br';
         message.subject = 'Classinforme - Primeiro contato';
         message.text = `A empresa: ${razao_social}, através do email: ${email}, deseja anunciar um produto da categoria: ${tipo_produto}\nInformações adiconais: ${campo_livre}`;
 
@@ -39,9 +39,9 @@ module.exports = {
     async emailAnuncio(request, response) {
         const { cnpj, email, plano } = request.body;
         message.to = 'lucia@sinfor.org.br';
-        message.from = 'sinfor.classinforme@gmail.com';
-        message.subject = `Novo anúncio: ${cnpj}`;
-        message.text = `A empresa dona do CNPJ ${cnpj}, com o email ${email}, cadastrou um novo anúncio na plataforma. O plano do anúncio é o ${plano}.`;
+        message.from = 'classinforme@sinfor.org.br';
+        message.subject = `Novo anúncio!`;
+        message.text = `A empresa dona do CNPJ ${cnpj}, com o email ${email}, cadastrou um novo anúncio na plataforma. O plano do anúncio é: ${plano}.`;
 
         return transport.sendMail(message, (err, info) => {
             if (err) {
@@ -54,11 +54,11 @@ module.exports = {
     },
 
     async emailCadastroToAdmin(request, response) {
-        const { razao_social } = request.body;
+        const { razao_social, telefone } = request.body;
         message.to = 'lucia@sinfor.org.br';
-        message.from = 'sinfor.classinforme@gmail.com';
+        message.from = 'classinforme@sinfor.org.br';
         message.subject = `Nova empresa! ${razao_social}`;
-        message.text = `A empresa "${razao_social}" acaba de se cadastrar na plataforma.`;
+        message.text = `A empresa "${razao_social}" acaba de se cadastrar na plataforma. Dê as boas vindas pelo telefone: ${telefone}`;
 
         return transport.sendMail(message, (err, info) => {
             if (err) {
@@ -73,9 +73,9 @@ module.exports = {
     async emailCadastroToEmpresa(request, response) {
         const { razao_social, email } = request.body;
         message.to = email;
-        message.from = 'sinfor.classinforme@gmail.com';
+        message.from = 'classinforme@sinfor.org.br';
         message.subject = `Bem vindo(a), ${razao_social}!`;
-        message.text = `    Faça seu login utilizando o CNPJ e a senha informados no cadastro através do link: https://classinforme.netlify.app/login 
+        message.text = `    Faça seu login utilizando o CNPJ e a senha através do link: https://classinforme.netlify.app/login 
         \n  O Sinfor te deseja boas-vindas e se dispõe a responder suas dúvidas através do email lucia@sinfor.org.br.`;
 
         return transport.sendMail(message, (err, info) => {
