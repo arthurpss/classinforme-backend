@@ -26,11 +26,11 @@ module.exports = {
     async novoProduto(request, response) {
         const empresa_param = request.params.cnpj;
         const thumbnail_url = "";
-        const { produto_id, categoria, titulo, descricao, empresa_cnpj } = request.body;
+        const { produto_id, categoria, titulo, descricao, empresa_cnpj, preco, link } = request.body;
         if (empresa_param === empresa_cnpj) {
             try {
                 await connection('produto').insert({
-                    produto_id, categoria, titulo, descricao, empresa_cnpj, thumbnail_url
+                    produto_id, categoria, titulo, descricao, empresa_cnpj, thumbnail_url, preco, link
                 });
                 return response.sendStatus(200);
             } catch (error) {
@@ -44,13 +44,15 @@ module.exports = {
 
     async atualizaProduto(request, response) {
         const idAtual = request.params.id;
-        const { categoria, titulo, descricao, empresa_cnpj } = request.body;
+        const { categoria, titulo, descricao, empresa_cnpj, preco, link } = request.body;
         try {
             await connection('produto').where('produto_id', idAtual).update({
                 categoria: categoria,
                 titulo: titulo,
                 descricao: descricao,
-                empresa_cnpj: empresa_cnpj
+                empresa_cnpj: empresa_cnpj,
+                preco: preco,
+                link: link
             });
             return response.sendStatus(200);
         } catch (error) {
