@@ -38,11 +38,25 @@ module.exports = {
     getImagem(request, response) {
         const imageKey = request.params.key;
         const imagePath = path.join(__dirname, "../files/uploads", imageKey);
+        
         try {
             response.sendFile(imagePath);
         } catch (error) {
             console.log(error);
             response.status(400).send('Error: Image does not exists');
+        }
+    },
+
+    async deletaImagem(request, response) {
+        const id = request.params.produto_id;
+        const key = request.body.key;
+
+        try {
+            await connection('imagem').where('produto_id', id).andWhere('key', key).del();
+            return response.sendStatus(200);
+        } catch (error) {
+            console.log(error)
+            return response.sendStatus(400);
         }
     }
 }

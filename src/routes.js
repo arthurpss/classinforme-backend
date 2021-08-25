@@ -44,6 +44,7 @@ routes.post('/imagem/:produto_id', multer(multerConfig).single("file"), ImagemCo
 routes.get('/imagens', ImagemController.getImages);
 routes.get('/imagens/:produto_id', ImagemController.getImagesByProdutoId);
 routes.get('/imagem/:key', ImagemController.getImagem);
+routes.post('/deleta-imagem/:produto_id', ImagemController.deletaImagem);
 
 //Anúncios
 routes.post('/anuncio/:cnpj/:plano', jwtService.verifyJWT, AnuncioController.novoAnuncio);
